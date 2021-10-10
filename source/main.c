@@ -1,13 +1,3 @@
-/*	Author: arama033
- *  Partner(s) Name: Abhinav
- *	Lab Section:
- *	Assignment: Lab #  Exercise #
- *	Exercise Description: [optional - include for your own benefit]
- *
- *	I acknowledge all content contained herein, excluding template or example
- *	code, is my own original work.
- */
-
 #include <avr/io.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
@@ -29,8 +19,9 @@ int main(void)
   	tmpB = PINB;
   	tmpC = PINC;
   	netWeight = tmpA + tmpB + tmpC;
-    tmpE = netWeight >> 2;
-    tmpE = tmpE << 2;
+
+    tmpE = netWeight & 0xFC;
+    
 
     if (netWeight > 0x8C) 
     {
@@ -45,9 +36,14 @@ int main(void)
     {
 			tmpE = tmpE | 0x02;
   	}
+    else
+    {
+    	tmpE = tmpE | 0x00;
+
+    }
     PORTD = tmpE;
     }
-	return 0;
+	return 1;
 }
 
 
