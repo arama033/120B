@@ -13,37 +13,49 @@
 #include "simAVRHeader.h"
 #endif
 
-int main(void) {
-     
+int main(void) 
+{
     DDRA = 0x00; PORTA = 0xFF;
-    DDRC = 0xFF; PORTC = 0x00;
-    unsigned char tempA = 0x00;
-
+    DDRB = 0x00; PORTB = 0xFF;
+    DDRC = 0x00; PORTC = 0xFF;
+    DDRD = 0xFF; PORTD = 0x00;
+    unsigned short netWeight = 0x0000;
+    unsigned char tmpA = 0x00;
+    unsigned char tmpB = 0x00;
+    unsigned char tmpC = 0x00;
+    unsigned char tmpE = 0x00;
     while (1) {
-	tempA = PINA;
-  
-	  if (tempA == 0x07 || tempA == 0x0B || tempA == 0x0D || tempA == 0x0E) 
-   {
-   PORTC = 0x01;	 
-   }
+    tmpA = PINA;
+  	tmpB = PINB;
+  	tmpC = PINC;
+  	netWeight = tmpA + tmpB + tmpC;
+    tmpE = netWeight >> 2;
+    tmpE = tmpE << 2;
 
-  	else if (tempA == 0x03 || tempA == 0x05 || tempA == 0x06 || tempA == 0x09 || tempA == 0x0A || tempA == 0x0C)
+    if (netWeight > 0x8C) 
+    {
+		tmpE = tmpE | 0x01;
+	  }
+	else 
   {
-		PORTC = 0x02;	 
+		tmpE = tmpE | 0x00;
 	}
 
-   else if (tempA == 0x01 || tempA == 0x02 || tempA == 0x04 || tempA == 0x08) 
-  {
-		PORTC = 0x03;	 
-	}
-  	else if (tempA == 0x00) 
-  {
-		PORTC = 0x04;	 
-	}
-	else
-  {
-		PORTC = 0x80; 
-	}
+ if (((tmpA - tmpC) > 0x50)||((tmpC - tmpA) > 0x50)) 
+    {
+			tmpE = tmpE | 0x02;
+  	}
+    PORTD = tmpE;
     }
-    return 1;
+	return 0;
 }
+
+
+
+
+  
+
+
+   
+
+
