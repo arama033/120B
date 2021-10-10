@@ -42,6 +42,10 @@ int main(void)
 
     }
     PORTD = tmpE;
+   
+   PORTD = PORTD >> 2;
+   PORTD = PORTD | tmpE;
+    
     }
 	return 1;
 }
