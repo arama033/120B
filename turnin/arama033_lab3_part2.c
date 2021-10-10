@@ -46,7 +46,12 @@ else if ((tempA  == 0x0D) || (tempA  == 0x0E) || (tempA == 0x0F))
    setter = 0x3F;  
 }
 
+else
+{
 
+setter = 0x40; 
+
+{
 	PORTC = setter;
 	
     }
