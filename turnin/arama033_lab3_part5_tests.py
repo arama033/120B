@@ -21,19 +21,36 @@
 
 
 tests = [ {'description': 'test 1',
-    'steps': [ {'inputs': [('PINB',0x01),('PIND',0x22)], 'iterations': 5 } ],
-    'expected': [('PORTB',0x04)],
-    },
+    'steps': [ {'inputs': [('PINA',0x01)], 'iterations': 5 } ],
+    'steps': [ {'inputs': [('PINA',0x00)], 'iterations': 5 } ],
 
+    'expected': [('PORTB',0x01)],
+    },
 
 {'description': 'test 2',
-    'steps': [ {'inputs': [('PINB',0x02),('PIND',0x01)], 'iterations': 5 } ],
-    'expected': [('PORTB',0x00)],
+    'steps': [ {'inputs': [('PINA',0x00)], 'iterations': 5 } ],
+    'expected': [('PORTB',0x01)],
     },
+
+
+{'description': 'test 3',
+    'steps': [ {'inputs': [('PINA',0x00)], 'iterations': 5 } ],
+    'steps': [ {'inputs': [('PINA',0x01)], 'iterations': 5 } ],
+
+    'expected': [('PORTB',0x02)],
+    },
+
+{'description': 'test 4',
+    'steps': [ {'inputs': [('PINA',0x10)], 'iterations': 5 } ],
+    'steps': [ {'inputs': [('PINA',0x00)], 'iterations': 5 } ],
+
+    'expected': [('PORTB',0x02)],
+    },
+
 
 
     ]
-#watch = ['PORTC']
+#watch = ['PORTB']
 
 
 
