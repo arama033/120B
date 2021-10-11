@@ -48,7 +48,7 @@ void Tick() {
 	}
       else if(((PINA & 0x07) == 0x02) && ((PINA & 0x07) == 0x04))
       {//if both hash and y pressed same time? not sure based on gradescope test
-      state = invalid;
+      state = Invalid;
       }
      else 
      {
@@ -77,13 +77,13 @@ void Tick() {
           state = Init;
          }
          break;
-	}
+	
 
  	 case Invalid:
  	 {
 	  break;
 	  }
-
+	}
 
 	switch(state) {
 		case Start:
